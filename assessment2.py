@@ -51,9 +51,9 @@ def count_child_objects(service, source_folder_id, count = 0, folders_only=False
 
     results = gdrive.get_folder_contents(service, source_folder_id)
 
-	#Loops through contents of folder
+    #Loops through contents of folder
     for index in results.get('files', []):
-		#Count folders recursively.
+        #Count folders recursively.
         if index['mimeType'] == 'application/vnd.google-apps.folder':
             count = count_child_objects(service,index['id'],count+1, folders_only)
         else:
