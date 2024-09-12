@@ -5,24 +5,24 @@ Title: assessment3.py
 Author: Tony Dhami
 
 Purpose: Script to copy the content (nested files/folders) of the source folder to the destination
-		 folder.
+         folder.
 '''
 import gdrive
 
 def main():
-	#Update variable to use another source folder.
-	source_file_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+    #Update variable to use another source folder.
+    source_file_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 
     #Update variable to use another destination folder.
-	destination_folder_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+    destination_folder_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 
-	service = gdrive.create_service()
+    service = gdrive.create_service()
 
-	top_level_objects = gdrive.get_top_level_objects(service, source_file_id)
+    top_level_objects = gdrive.get_top_level_objects(service, source_file_id)
 
-	for key in top_level_objects:
-		#Recursive copy.
-		copy_recursive(service, key, destination_folder_id)
+    for key in top_level_objects:
+        #Recursive copy.
+        copy_recursive(service, key, destination_folder_id)
 
 def create_folder(service, folder_name, parent_folder_id):
     '''
@@ -81,7 +81,7 @@ def copy_recursive(service, source_object_id, destination_folder_id):
     	destination_folder_id: ID of the drive folder to copy to.
     '''
 	
-	#Get name.	
+    #Get name.	
     source_object_metadata = gdrive.get_metadata(service, source_object_id)
     source_object_name = source_object_metadata['name']
 
@@ -89,12 +89,12 @@ def copy_recursive(service, source_object_id, destination_folder_id):
 
         root_folder = create_folder(service, source_object_name, destination_folder_id)
 
-		#Iterate over items in source folder
+	#Iterate over items in source folder
         results = gdrive.get_folder_contents(service, source_object_id)
 
         for index in results.get('files', []):
 			
-			#If drive object is folder, recursively call this function.
+	    #If drive object is folder, recursively call this function.
             if index['mimeType'] == 'application/vnd.google-apps.folder':
                 copy_recursive(service, index['id'], root_folder['id'])
             else:
