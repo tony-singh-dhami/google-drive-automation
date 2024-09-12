@@ -11,14 +11,14 @@ import gdrive
 
 def main():
     #Update variable to use another source folder.
-    source_file_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+    source_folder_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 
     #Update variable to use another destination folder.
     destination_folder_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 
     service = gdrive.create_service()
 
-    top_level_objects = gdrive.get_top_level_objects(service, source_file_id)
+    top_level_objects = gdrive.get_top_level_objects(service, source_folder_id)
 
     for key in top_level_objects:
         #Recursive copy.
