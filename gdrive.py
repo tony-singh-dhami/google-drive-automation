@@ -75,10 +75,10 @@ def get_top_level_objects(service, source_folder_id, folders_only=False):
     #Get folder contents.
     results = get_folder_contents(service, source_folder_id)
 
-	#initliaze dictionary for top level data.
+    #initliaze dictionary for top level data.
     top_level_objects = {}
 
-	#Loops through contents of folder.
+    #Loops through contents of folder.
     for index in results.get('files', []):
         if folders_only:
             if index['mimeType'] == 'application/vnd.google-apps.folder':
