@@ -48,8 +48,8 @@ def get_folder_contents(service, folder_id):
     return results
 
 def get_metadata(service, id):
-	'''
-	Returns metadata name, mimeType from file/folder id.
+    '''
+    Returns metadata name, mimeType from file/folder id.
 
     Args:
     	service: Drive api service instance.
@@ -89,9 +89,9 @@ def get_top_level_objects(service, source_folder_id, folders_only=False):
     return top_level_objects
 
 def create_service():
-	'''
-	Builds and returns Drive service object using oauth flow.
-	Prompts for authorization if needed.
+    '''
+    Builds and returns Drive service object using oauth flow.
+    Prompts for authorization if needed.
 
     Return:
     	service: Drive service object.
