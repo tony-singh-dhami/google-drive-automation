@@ -27,12 +27,12 @@ def main():
         print("\tTotal Child Objects: %s" % count)
 
         #Count folder objects for source folder.
-	source_nested_folder_count = count_child_objects(service,source_folder_id,count=0,folders_only=True)
+        source_nested_folder_count = count_child_objects(service,source_folder_id,count=0,folders_only=True)
 
-	source_folder_metadata = gdrive.get_metadata(service, source_folder_id)
+        source_folder_metadata = gdrive.get_metadata(service, source_folder_id)
 
-	print("\nSource Folder: %s" % source_folder_metadata['name'])
-	print("\tNested folders: %s" % source_nested_folder_count)
+        print("\nSource Folder: %s" % source_folder_metadata['name'])
+        print("\tNested folders: %s" % source_nested_folder_count)
 
 
 def count_child_objects(service, source_folder_id, count = 0, folders_only=False):
