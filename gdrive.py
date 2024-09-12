@@ -57,7 +57,7 @@ def get_metadata(service, id):
     Return:
     	Dictionary of name,mimeType returned from query.
     '''
-	return service.files().get(fileId=id, fields='name,mimeType').execute()
+    return service.files().get(fileId=id, fields='name,mimeType').execute()
 
 def get_top_level_objects(service, source_folder_id, folders_only=False):
     '''
@@ -97,27 +97,26 @@ def create_service():
     	service: Drive service object.
     '''
 
-	creds = None
+    creds = None
 
-	# Load existing credentials from TOKEN if file exists.
-	if os.path.exists(TOKEN):
-		creds = Credentials.from_authorized_user_file(TOKEN, SCOPES)
+    # Load existing credentials from TOKEN if file exists.
+    if os.path.exists(TOKEN):
+        creds = Credentials.from_authorized_user_file(TOKEN, SCOPES)
 	
-	if not creds or not creds.valid:		
-		#Refresh credentials.
-		if creds and creds.expired and creds.refresh_token:
-			creds.refresh(Request())
+    if not creds or not creds.valid:		
+        #Refresh credentials.
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            #User authenticates again
+            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET, SCOPES)
+            creds = flow.run_local_server(port=0)
 		
-		else:
-			#User authenticates again
-			flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET, SCOPES)
-			creds = flow.run_local_server(port=0)
-		
-		# Save the credentials for the next run.
-		with open(TOKEN, "w") as token:
-			token.write(creds.to_json())
+        # Save the credentials for the next run.
+        with open(TOKEN, "w") as token:
+            token.write(creds.to_json())
 
-	#Build service object with credentials.
-	service = build('drive', 'v3', credentials=creds)
+    #Build service object with credentials.
+    service = build('drive', 'v3', credentials=creds)
 
-	return service
+    return service
