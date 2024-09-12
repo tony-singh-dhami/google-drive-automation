@@ -12,21 +12,21 @@ Purpose: Script to generate a report that shows the number of child objects (rec
 import gdrive
 
 def main():
-	#Update variable to use another folder.
-	source_folder_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+    #Update variable to use another folder.
+    source_folder_id = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 
-	service = gdrive.create_service()
+    service = gdrive.create_service()
 
-	top_level_folders = gdrive.get_top_level_objects(service, source_folder_id, folders_only=True)
+    top_level_folders = gdrive.get_top_level_objects(service, source_folder_id, folders_only=True)
 
-	for folder in top_level_folders:
-		print("Top Level Folder: %s" % top_level_folders[folder]['name'])
+    for folder in top_level_folders:
+        print("Top Level Folder: %s" % top_level_folders[folder]['name'])
 
-		count = count_child_objects(service,folder)
+        count = count_child_objects(service,folder)
 
-		print("\tTotal Child Objects: %s" % count)
+        print("\tTotal Child Objects: %s" % count)
 
-	#Count folder objects for source folder.
+        #Count folder objects for source folder.
 	source_nested_folder_count = count_child_objects(service,source_folder_id,count=0,folders_only=True)
 
 	source_folder_metadata = gdrive.get_metadata(service, source_folder_id)
