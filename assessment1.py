@@ -36,12 +36,12 @@ def print_folder_stats(service, source_folder_id):
     #Loops through contents of folder
     for index in results.get('files', []):
 
-        #If folder increment counter and output name.
+        #If folder, increment counter and output name.
         if index['mimeType'] == 'application/vnd.google-apps.folder':
             print("Folder: %s" % index['name'])
             folder_count+=1
 
-        #If not a folder increment counter and output name
+        #If not a folder, increment counter and output name
         else:
             print("File: %s" % index['name'])
             file_count+=1
